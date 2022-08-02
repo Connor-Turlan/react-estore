@@ -1,1 +1,5 @@
-.Carousel {}
+.Carousel {
+	display: flex;
+	flex-wrap: nowrap;
+	overflow: scroll;
+}

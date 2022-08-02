@@ -1,14 +1,9 @@
-@echo off
-setlocal EnableDelayedExpansion
+# get params
+$type=$1
+$name=$2
 
-:: get params
-set type=%1
-set name=%2
-shift
-shift
-
-:: set the path to either containers components depending on the param.
-if "%type%" == "component" (
+# set the path to either containers components depending on the param.
+if [ $type == "component" ]  (
 	set localPath=./src/components
 ) else if "%type%" == "container" (
 	set localPath=./src/containers
@@ -18,7 +13,7 @@ if "%type%" == "component" (
 	exit 0
 )
 
-:: create the directory structure.
+# create the directory structure.
 if not exist %localPath% (
 	md %localPath%
 )
