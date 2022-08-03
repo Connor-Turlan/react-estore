@@ -1,4 +1,4 @@
-import "./App.css";
+import styles from "./App.module.scss";
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import StoreGrid from "./containers/StoreGrid/StoreGrid";
@@ -25,15 +25,16 @@ function App() {
 
 	const handleClick = (event) => {
 		setLoading(true);
+
 		getItemData()
-			.then((data) => console.log(data))
+			.then((data) => setItems(data))
 			.finally(setLoading(false));
 	};
 
 	return (
-		<div className="App">
+		<div className={styles.App}>
 			{isLoading && <Loading />}
-			<Carousel items={items} />
+			<Carousel items={shopItems} />
 			<StoreGrid items={items} />
 			<button onClick={handleClick}>click</button>
 		</div>
