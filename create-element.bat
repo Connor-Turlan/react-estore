@@ -13,9 +13,16 @@ if "%type%" == "component" (
 ) else if "%type%" == "container" (
 	set localPath=./src/containers
 ) else (
-	echo Invalid type %type%.
-	echo usage create-element [type:component/container] [name]
-	exit 0
+	echo Invalid type "%type%".
+	echo usage: create-element [type:component^|container] [name]
+	exit 1
+)
+
+:: validate the name
+if "%name%" == "" (
+	echo Name must be specified.
+	echo usage: create-element %type% [name]
+	exit 1
 )
 
 :: create the directory structure.
@@ -25,14 +32,15 @@ if not exist %localPath% (
 
 :: check that the component doesn't exist.
 if exist "%localPath%/%name%" (
-	set /p write= "Overwrite existing component? (y/n): "
+	echo %type% "%name%" already exists.
+	set /p write= "Overwrite? (y/n): "
 	if "!write!" NEQ "y" (
-		echo exiting...
-		exit 0
+		echo Component unmodified, exiting...
+		exit 1
 	)
+	echo Overwriting component "%name%".
 ) else (
 	mkdir "%localPath%/%name%"
-	echo Created component directory.
 )
 
 :: create the index file.

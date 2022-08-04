@@ -13,4 +13,11 @@
 	&:hover {
 		outline: 4px solid rgb(158, 190, 250);
 	}
+
+	&__img {
+		width: 200px;
+		height: 200px;
+		border-radius: 5px;
+		object-fit: contain;
+	}
 }
