@@ -3,9 +3,17 @@ import { getProducts } from "../services/api";
 
 export const ProductContext = createContext();
 
-const ProductProvider = ({ children }) => {
+export const ProductProvider = ({ children }) => {
 	const [isLoading, setLoading] = useState(false);
 	const [products, setProducts] = useState([]);
+
+	const fetchProducts = (event) => {
+		setLoading(true);
+
+		getProducts()
+			.then((data) => setProducts(data))
+			.finally(setLoading(false));
+	};
 
 	const context = {
 		isLoading,

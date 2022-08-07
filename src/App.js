@@ -5,18 +5,19 @@ import { getItemData, getItems, getProducts } from "./services/api";
 import Nav from "./components/Nav/Nav";
 import Home from "./containers/Home/Home";
 import Products from "./containers/Products/Products";
-import { ProductContext } from "./contexts/Products";
+import { ProductProvider } from "./contexts/Products";
 
 function App() {
 	return (
 		<BrowserRouter>
-			<ProductContext>
+			<ProductProvider>
 				<Nav />
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/products" element={<Products />} />
+					<Route path="/products/:productID" element={<Products />} />
 				</Routes>
-			</ProductContext>
+			</ProductProvider>
 		</BrowserRouter>
 	);
 }

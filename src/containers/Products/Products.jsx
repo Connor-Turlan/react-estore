@@ -5,11 +5,10 @@ import StoreGrid from "../StoreGrid/StoreGrid";
 import styles from "./Products.module.scss";
 
 function Products(props) {
-	const { isLoading, products } = useContext(ProductContext);
+	const { isLoading, products, fetchProducts } = useContext(ProductContext);
 
-	useEffect(() => {
-		fetchProducts();
-	}, []);
+	useEffect(fetchProducts, []);
+
 	return (
 		<>
 			<h1>All Products</h1>

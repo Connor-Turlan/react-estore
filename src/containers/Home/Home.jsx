@@ -7,20 +7,10 @@ import { ProductContext } from "../../contexts/Products";
 import { getProducts } from "../../services/api";
 
 function Home(props) {
-	const { products, setProducts, isLoading, setLoading } =
+	const { products, setProducts, isLoading, setLoading, fetchProducts } =
 		useContext(ProductContext);
 
-	const fetchProducts = (event) => {
-		setLoading(true);
-
-		getProducts()
-			.then((data) => setProducts(data))
-			.finally(setLoading(false));
-	};
-
-	useEffect(() => {
-		fetchProducts();
-	}, []);
+	useEffect(fetchProducts, []);
 
 	return (
 		<>
