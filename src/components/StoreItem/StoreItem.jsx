@@ -6,7 +6,7 @@ function StoreItem(props) {
 
 	return (
 		<NavLink className={styles.StoreItem} to={`/products/${id}`}>
-			<h1>{name.match(/\w+/i)}</h1>
+			<h1>{name /* .match(/\w+/i) */}</h1>
 			<img className={styles.StoreItem__img} src={image} />
 			<p>{`$${price}`}</p>
 		</NavLink>

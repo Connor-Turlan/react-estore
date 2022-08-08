@@ -21,25 +21,41 @@ function ProductPage(props) {
 			});
 	};
 
+	const addProductToCart = () => {
+		console.log("beep boop.");
+	};
+
 	useEffect(fetchProduct, []);
 
 	const { name, image, colour, price, packQuantity, description } = product;
 
 	return (
-		<>
+		<div className={styles.Product}>
 			{loading && <Loading />}
-			<h2>{name}</h2>
-			<p>favourite item??</p>
-			<p>quantity: {packQuantity}</p>
-			<p>variants: {colour}</p>
-			<p>price: {price}</p>
-			<img src={image} alt={name}></img>
-			<p>{description}</p>
+			<header className={styles.Product__Title}>
+				<h2>{name}</h2>
+				<p>FAV</p>
+			</header>
+			<div className={styles.Product__Body}>
+				<img
+					className={styles.Product__Image}
+					src={image}
+					alt={name}
+				></img>
+				<main className={styles.Product__Details}>
+					<p>Price: {price}</p>
+					<p>Pack Size: {packQuantity}</p>
+					<p>Avaliable in: {colour}</p>
+					<button onClick={addProductToCart}>Add to Cart</button>
+				</main>
+			</div>
+			<p className={styles.Product__Description}>{description}</p>
+
 			{/* <h3>Product Info Raw</h3>
 			{Object.entries(product || {}).map((entry) => (
 				<p key={entry[0]}>{entry.join(": ")}</p>
 			))} */}
-		</>
+		</div>
 	);
 }
 

@@ -1,1 +1,35 @@
-.ProductPage {}
+.Product {
+	display: grid;
+	grid-template-rows: 100px 1fr;
+
+	&__Title {
+		display: flex;
+		align-items: center;
+		gap: 40px;
+
+		font-size: 24px;
+	}
+
+	&__Body {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1fr;
+		gap: 40px;
+	}
+
+	&__Image {
+		width: 400px;
+		height: 400px;
+		object-fit: contain;
+	}
+
+	&__Details {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	&__Description {
+		margin-top: 100px;
+	}
+}

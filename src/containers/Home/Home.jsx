@@ -12,8 +12,8 @@ function Home(props) {
 
 	return (
 		<>
-			<h1>🔥Store</h1>
 			{isLoading && <Loading />}
+			<h1>🔥Store</h1>
 
 			<Carousel products={products.slice(0, 5)} />
 			<StoreGrid items={products.slice(0, 18)} />
