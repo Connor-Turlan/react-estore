@@ -10,6 +10,9 @@ function Nav(props) {
 			<NavLink className={styles.Nav__link} to="/products">
 				Products
 			</NavLink>
+			<NavLink className={styles.Nav__link} to="/cart">
+				<i className="fa">&#xf07a;</i>
+			</NavLink>
 		</nav>
 	);
 }
