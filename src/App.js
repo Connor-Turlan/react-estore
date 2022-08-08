@@ -10,19 +10,21 @@ import { ProductProvider } from "./contexts/Products";
 
 function App() {
 	return (
-		<BrowserRouter>
-			<ProductProvider>
-				<Nav />
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/products" element={<Products />} />
-					<Route
-						path="/products/:productID"
-						element={<ProductPage />}
-					/>
-				</Routes>
-			</ProductProvider>
-		</BrowserRouter>
+		<main className={styles.App}>
+			<BrowserRouter>
+				<ProductProvider>
+					<Nav />
+					<Routes>
+						<Route path="/" element={<Home />} />
+						<Route path="/products" element={<Products />} />
+						<Route
+							path="/products/:productID"
+							element={<ProductPage />}
+						/>
+					</Routes>
+				</ProductProvider>
+			</BrowserRouter>
+		</main>
 	);
 }
 

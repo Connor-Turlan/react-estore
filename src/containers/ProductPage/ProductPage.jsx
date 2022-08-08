@@ -15,6 +15,12 @@ function ProductPage(props) {
 			<p>price</p>
 			<p>image</p>
 			<p>favourite item??</p>
+			<h3>Product Info Raw</h3>
+			{Object.entries(
+				products.find((product) => product.id === productID) || {}
+			).map((entry) => (
+				<p>{entry.join(": ")}</p>
+			))}
 		</>
 	);
 }
