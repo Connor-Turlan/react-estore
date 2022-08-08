@@ -2,10 +2,12 @@ import styles from "./Carousel.module.scss";
 import CarouselItem from "../../components/CarouselItem/CarouselItem";
 
 function Carousel(props) {
+	const { products } = props;
+
 	return (
 		<div className={styles.Carousel}>
-			{props.items.map((item, index) => (
-				<CarouselItem key={index} item={item} />
+			{products.slice(0, 8).map((product) => (
+				<CarouselItem key={product.id} item={product} />
 			))}
 		</div>
 	);

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { getProducts } from "../services/api";
 
 export const ProductContext = createContext();
@@ -14,6 +14,8 @@ export const ProductProvider = ({ children }) => {
 			.then((data) => setProducts(data))
 			.finally(setLoading(false));
 	};
+
+	useEffect(fetchProducts, []);
 
 	const context = {
 		isLoading,

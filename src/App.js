@@ -5,6 +5,7 @@ import { getItemData, getItems, getProducts } from "./services/api";
 import Nav from "./components/Nav/Nav";
 import Home from "./containers/Home/Home";
 import Products from "./containers/Products/Products";
+import ProductPage from "./containers/ProductPage/ProductPage";
 import { ProductProvider } from "./contexts/Products";
 
 function App() {
@@ -15,7 +16,10 @@ function App() {
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/products" element={<Products />} />
-					<Route path="/products/:productID" element={<Products />} />
+					<Route
+						path="/products/:productID"
+						element={<ProductPage />}
+					/>
 				</Routes>
 			</ProductProvider>
 		</BrowserRouter>

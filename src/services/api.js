@@ -25,6 +25,18 @@ export const getProducts = async () => {
 	return products;
 };
 
+export const getProductByID = async (itemID) => {
+	// fetch the database collection for products.
+	const collectionRef = firestore.collection("products");
+	const data = await collectionRef
+		.get()
+		.filter((key) => key.includes(itemID));
+
+	// extract the product data from the database, include the document id.
+	const products = data.docs.map((item) => ({ ...item.data(), id: item.id }));
+	return products;
+};
+
 // function to push new items to the database.
 /* export const pushItem = async (itemID, itemData) => {
 	const response = firestore.collection("products").doc(itemID).set(itemData);

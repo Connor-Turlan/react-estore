@@ -1,10 +1,14 @@
+import { NavLink } from "react-router-dom";
 import styles from "./CarouselItem.module.scss";
 
 function CarouselItem(props) {
+	const { id, name, image, price } = props.item;
+
 	return (
-		<div className={styles.CarouselItem}>
-			<h1>{props.item.name}</h1>
-		</div>
+		<NavLink className={styles.CarouselItem} to={`products/${id}`}>
+			<img src={image} />
+			<h1 className={styles.CarouselItem__Title}>{name}</h1>
+		</NavLink>
 	);
 }
 

@@ -1,5 +1,19 @@
 .CarouselItem {
-	display: flex;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 200px 100px;
+
 	justify-content: center;
 	align-items: center;
+
+	height: 300px;
+	min-width: 100vw;
+
+	border: 1px solid black;
+
+	&__Title {
+		position: static;
+		right: 0;
+		bottom: 0;
+	}
 }

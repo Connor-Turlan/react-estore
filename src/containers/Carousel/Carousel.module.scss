@@ -1,4 +1,11 @@
 .Carousel {
 	display: flex;
-	overflow: scroll;
+	gap: 10px;
+
+	height: 400px;
+
+	margin: 20px 0px;
+
+	overflow-x: scroll;
+	overflow-y: hidden;
 }

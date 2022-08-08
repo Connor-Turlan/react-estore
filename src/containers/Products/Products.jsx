@@ -5,9 +5,7 @@ import StoreGrid from "../StoreGrid/StoreGrid";
 import styles from "./Products.module.scss";
 
 function Products(props) {
-	const { isLoading, products, fetchProducts } = useContext(ProductContext);
-
-	useEffect(fetchProducts, []);
+	const { isLoading, products } = useContext(ProductContext);
 
 	return (
 		<>
