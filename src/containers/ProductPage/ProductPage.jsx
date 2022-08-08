@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ProductContext } from "../../contexts/Products";
+import { ProductContext } from "../../contexts/ProductContext";
 import { getProductByID } from "../../services/api";
 import Loading from "../../components/Loading/Loading";
 import styles from "./ProductPage.module.scss";
@@ -11,29 +11,34 @@ function ProductPage(props) {
 
 	const { productID } = useParams();
 
-	useEffect(() => {
+	const fetchProduct = () => {
 		setLoading(true);
 
 		getProductByID(productID)
-			.then((data) => setProduct(data))
+			.then(setProduct)
 			.finally((data) => {
 				setLoading(false);
 			});
-	}, []);
+	};
+
+	useEffect(fetchProduct, []);
+
+	const { name, image, colour, price, packQuantity, description } = product;
 
 	return (
 		<>
 			{loading && <Loading />}
-			<p>item name {productID}</p>
-			<p>quantity</p>
-			<p>variants</p>
-			<p>price</p>
-			<p>image</p>
+			<h2>{name}</h2>
 			<p>favourite item??</p>
-			<h3>Product Info Raw</h3>
+			<p>quantity: {packQuantity}</p>
+			<p>variants: {colour}</p>
+			<p>price: {price}</p>
+			<img src={image} alt={name}></img>
+			<p>{description}</p>
+			{/* <h3>Product Info Raw</h3>
 			{Object.entries(product || {}).map((entry) => (
 				<p key={entry[0]}>{entry.join(": ")}</p>
-			))}
+			))} */}
 		</>
 	);
 }

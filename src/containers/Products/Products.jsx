@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { ProductContext } from "../../contexts/Products";
+import { ProductContext } from "../../contexts/ProductContext";
 import Loading from "../../components/Loading/Loading";
 import StoreGrid from "../StoreGrid/StoreGrid";
 import styles from "./Products.module.scss";

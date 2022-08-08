@@ -10,9 +10,7 @@ export const ProductProvider = ({ children }) => {
 	const fetchProducts = (event) => {
 		setLoading(true);
 
-		getProducts()
-			.then((data) => setProducts(data))
-			.finally(setLoading(false));
+		getProducts().then(setProducts).finally(setLoading(false));
 	};
 
 	useEffect(fetchProducts, []);

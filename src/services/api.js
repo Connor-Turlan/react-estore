@@ -25,8 +25,6 @@ export const getProducts = async () => {
 };
 
 export const getProductByID = async (itemID) => {
-	console.log("fetching item with ID:", itemID);
-
 	// fetch the database collection for products.
 	const collectionRef = firestore.collection("products");
 	const docRef = collectionRef.doc(itemID);

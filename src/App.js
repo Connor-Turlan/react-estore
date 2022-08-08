@@ -6,7 +6,7 @@ import Nav from "./components/Nav/Nav";
 import Home from "./containers/Home/Home";
 import Products from "./containers/Products/Products";
 import ProductPage from "./containers/ProductPage/ProductPage";
-import { ProductProvider } from "./contexts/Products";
+import { ProductProvider } from "./contexts/ProductContext";
 
 function App() {
 	return (
