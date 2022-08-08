@@ -21,20 +21,22 @@ export const getProducts = async () => {
 	const data = await collectionRef.get();
 
 	// extract the product data from the database, include the document id.
-	const products = data.docs.map((item) => ({ ...item.data(), id: item.id }));
-	return products;
+	return data.docs.map((item) => ({ ...item.data(), id: item.id }));
 };
 
 export const getProductByID = async (itemID) => {
+	console.log("fetching item with ID:", itemID);
+
 	// fetch the database collection for products.
 	const collectionRef = firestore.collection("products");
-	const data = await collectionRef
-		.get()
-		.filter((key) => key.includes(itemID));
+	const docRef = collectionRef.doc(itemID);
 
 	// extract the product data from the database, include the document id.
-	const products = data.docs.map((item) => ({ ...item.data(), id: item.id }));
-	return products;
+	const document = await docRef.get();
+	return {
+		...document.data(),
+		id: document.id,
+	};
 };
 
 // function to push new items to the database.
