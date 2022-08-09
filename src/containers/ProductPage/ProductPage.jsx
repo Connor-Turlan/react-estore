@@ -44,7 +44,7 @@ function ProductPage(props) {
 		const totalQty = (cartItems[productID] || 0) + requested;
 
 		// validate that the stock is availiable.
-		if (stock < totalQty) {
+		if (stock < requested) {
 			alert("not enough stock.");
 			return;
 		}
@@ -54,10 +54,10 @@ function ProductPage(props) {
 		updateStock(productID, stock - requested);
 
 		// send user to cart.
-		navigate("/cart");
+		/* navigate("/cart"); */
 	};
 
-	useEffect(fetchProduct, []);
+	useEffect(fetchProduct, [cartItems]);
 
 	// scroll to top on mount.
 	useEffect(() => {
@@ -68,32 +68,34 @@ function ProductPage(props) {
 		product;
 
 	return (
-		<div className={styles.Product}>
-			{loading && <Loading />}
-			<header className={styles.Product__Title}>
-				<h2>{name}</h2>
-				<p>FAV</p>
-			</header>
-			<div className={styles.Product__Body}>
-				<img
-					className={styles.Product__Image}
-					src={image}
-					alt={name}
-				></img>
-				<main className={styles.Product__Details}>
-					<p>Price: {price}</p>
-					<p>Pack Size: {packQuantity}</p>
-					<p>Avaliable in: {colour}</p>
-					<p>In stock: {stock}</p>
-					<input
-						type="number"
-						value={quantity}
-						onChange={updateQuantity}
-					/>
-					<button onClick={updateCart}>Add to Cart</button>
-				</main>
+		<div className={styles.Container}>
+			<div className={styles.Product}>
+				{loading && <Loading />}
+				<header className={styles.Product__Title}>
+					<h2>{name}</h2>
+					<p>FAV</p>
+				</header>
+				<div className={styles.Product__Body}>
+					<img
+						className={styles.Product__Image}
+						src={image}
+						alt={name}
+					></img>
+					<main className={styles.Product__Details}>
+						<p>Price: {price}</p>
+						<p>Pack Size: {packQuantity}</p>
+						<p>Avaliable in: {colour}</p>
+						<p>In stock: {stock}</p>
+						<input
+							type="number"
+							value={quantity}
+							onChange={updateQuantity}
+						/>
+						<button onClick={updateCart}>Add to Cart</button>
+					</main>
+				</div>
+				<p className={styles.Product__Description}>{description}</p>
 			</div>
-			<p className={styles.Product__Description}>{description}</p>
 		</div>
 	);
 }
