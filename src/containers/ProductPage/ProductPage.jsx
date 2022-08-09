@@ -6,20 +6,15 @@ import { ProductContext } from "../../contexts/ProductContext";
 import { ShoppingCartContext } from "../../contexts/ShoppingCartContext";
 import styles from "./ProductPage.module.scss";
 
-const getRequestedQuantity = () => {
-	const qty = document.getElementById();
-	return qty;
-};
-
 function ProductPage(props) {
 	const { loading, setLoading, updateStock } = useContext(ProductContext);
 	const { cartItems, setCart } = useContext(ShoppingCartContext);
 
-	const [product, setProduct] = useState({});
-	const [quantity, setQuantity] = useState(1);
-
 	const { productID } = useParams();
 	const navigate = useNavigate();
+
+	const [product, setProduct] = useState({});
+	const [quantity, setQuantity] = useState(1);
 
 	const fetchProduct = () => {
 		setLoading(true);
@@ -36,7 +31,9 @@ function ProductPage(props) {
 			setQuantity(e.target.value);
 	};
 
-	const updateCart = async () => {
+	const updateCart = async (event) => {
+		event.preventDefault();
+
 		let { stock } = product;
 
 		// get the requested quantity from the user.
@@ -45,19 +42,21 @@ function ProductPage(props) {
 
 		// validate that the stock is availiable.
 		if (stock < requested) {
-			alert("not enough stock.");
+			alert("Not enough items in stock.");
 			return;
 		}
 
 		// update the cart and server stock counts.
 		setCart({ ...cartItems, [productID]: totalQty });
-		updateStock(productID, stock - requested);
+		await updateStock(productID, stock - requested);
+
+		setQuantity(1);
 
 		// send user to cart.
-		/* navigate("/cart"); */
+		navigate("/cart");
 	};
 
-	useEffect(fetchProduct, [cartItems]);
+	useEffect(fetchProduct, [cartItems, productID, setLoading]);
 
 	// scroll to top on mount.
 	useEffect(() => {
@@ -75,25 +74,35 @@ function ProductPage(props) {
 					<h2>{name}</h2>
 					<p>FAV</p>
 				</header>
+
 				<div className={styles.Product__Body}>
 					<img
 						className={styles.Product__Image}
 						src={image}
 						alt={name}
 					></img>
+
 					<main className={styles.Product__Details}>
 						<p>Price: {price}</p>
 						<p>Pack Size: {packQuantity}</p>
 						<p>Avaliable in: {colour}</p>
+
 						<p>In stock: {stock}</p>
-						<input
-							type="number"
-							value={quantity}
-							onChange={updateQuantity}
-						/>
-						<button onClick={updateCart}>Add to Cart</button>
+						{productID in cartItems && (
+							<p>In cart: {cartItems[productID]}</p>
+						)}
+
+						<form onSubmit={updateCart}>
+							<input
+								type="number"
+								value={quantity}
+								onChange={updateQuantity}
+							/>
+							<input type="submit" value="Add to Cart" />
+						</form>
 					</main>
 				</div>
+
 				<p className={styles.Product__Description}>{description}</p>
 			</div>
 		</div>

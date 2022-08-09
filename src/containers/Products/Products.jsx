@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { ProductContext } from "../../contexts/ProductContext";
 import Loading from "../../components/Loading/Loading";
 import StoreGrid from "../StoreGrid/StoreGrid";
-import styles from "./Products.module.scss";
+/* import styles from "./Products.module.scss"; */
 
 function Products(props) {
 	const { isLoading, products } = useContext(ProductContext);

@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 import { CookiesProvider } from "react-cookie";
 
 export const ShoppingCartContext = createContext();
