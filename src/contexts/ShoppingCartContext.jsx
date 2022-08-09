@@ -2,11 +2,11 @@ import { createContext, useState, useEffect, useRef } from "react";
 import { CookiesProvider, useCookies } from "react-cookie";
 import { getProducts } from "../services/api";
 
-export const ShoppingCart = createContext();
+export const ShoppingCartContext = createContext();
 
 export const ShoppingCartProvider = ({ children }) => {
 	const [cartItems, setCart] = useState({});
-	const [cartID, setCartID] = useState("");
+	/* const [cartID, setCartID] = useState(""); */
 	/* const [cookies, setCookie, removeCookie] = useCookies(); */
 
 	useEffect(() => {}, []);
@@ -15,9 +15,9 @@ export const ShoppingCartProvider = ({ children }) => {
 
 	return (
 		<CookiesProvider>
-			<ShoppingCart.Provider value={context}>
+			<ShoppingCartContext.Provider value={context}>
 				{children}
-			</ShoppingCart.Provider>
+			</ShoppingCartContext.Provider>
 		</CookiesProvider>
 	);
 };

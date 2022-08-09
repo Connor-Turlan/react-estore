@@ -26,9 +26,7 @@ const updateDocumentProperty = async (
 	// fetch the database collection for products.
 	const collectionRef = firestore.collection(collection);
 	const docRef = collectionRef.doc(reference);
-	await docRef.update({ [property]: newValue });
-
-	return true;
+	return docRef.update({ [property]: newValue });
 };
 
 /* 

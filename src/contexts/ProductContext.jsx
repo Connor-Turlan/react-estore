@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { getProducts } from "../services/api";
+import { getProducts, updateProductStock } from "../services/api";
 
 export const ProductContext = createContext();
 
@@ -7,13 +7,23 @@ export const ProductProvider = ({ children }) => {
 	const [isLoading, setLoading] = useState(false);
 	const [products, setProducts] = useState([]);
 
-	const fetchProducts = (event) => {
+	const fetchProducts = async (event) => {
 		setLoading(true);
 
-		getProducts().then(setProducts).finally(setLoading(false));
+		const promise = getProducts();
+		promise.then(setProducts).finally(setLoading(false));
+
+		return promise;
 	};
 
-	useEffect(fetchProducts, []);
+	const updateStock = async (productID, newQuantity) => {
+		await updateProductStock(productID, newQuantity);
+		await fetchProducts();
+	};
+
+	useEffect(() => {
+		fetchProducts();
+	}, []);
 
 	const context = {
 		isLoading,
@@ -21,6 +31,7 @@ export const ProductProvider = ({ children }) => {
 		products,
 		setProducts,
 		fetchProducts,
+		updateStock,
 	};
 
 	return (

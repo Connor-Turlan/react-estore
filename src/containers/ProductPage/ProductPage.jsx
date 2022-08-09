@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { ProductContext } from "../../contexts/ProductContext";
 import { getProductByID } from "../../services/api";
 import Loading from "../../components/Loading/Loading";
 import styles from "./ProductPage.module.scss";
-import { ShoppingCart } from "../../contexts/ShoppingCartContext";
+import { ShoppingCartContext } from "../../contexts/ShoppingCartContext";
 
 const getRequestedQuantity = () => {
 	const qty = document.getElementById();
@@ -12,13 +12,14 @@ const getRequestedQuantity = () => {
 };
 
 function ProductPage(props) {
-	const { loading, setLoading } = useContext(ProductContext);
-	const { cartItems, setCart } = useContext(ShoppingCart);
+	const { loading, setLoading, updateStock } = useContext(ProductContext);
+	const { cartItems, setCart } = useContext(ShoppingCartContext);
 
 	const [product, setProduct] = useState({});
 	const [quantity, setQuantity] = useState(1);
 
 	const { productID } = useParams();
+	const navigate = useNavigate();
 
 	const fetchProduct = () => {
 		setLoading(true);
@@ -31,16 +32,42 @@ function ProductPage(props) {
 	};
 
 	const updateQuantity = (e) => {
-		if (e.target.value > 0) setQuantity(e.target.value);
+		setQuantity(e.target.value);
 	};
 
-	const updateCart = () => {
+	const updateCart = async () => {
 		console.log(productID, quantity);
+		const { stock } = product;
+		const currentQty = cartItems[productID] || 0;
+
+		// validate the quantity.
+		if (quantity <= 0) {
+			alert("stock quantity must be greater than 0.");
+			return;
+		}
+
+		// validate the stock levels.
+		if (stock < currentQty) {
+			alert("not enough items in stock.");
+			return;
+		}
+
+		// update the product's stock count.
+		await updateStock(productID, stock - currentQty);
+		console.log(stock, currentQty, stock - currentQty);
+
+		// update the cart.
+		setCart({ ...cartItems, [productID]: currentQty + parseInt(quantity) });
+		setQuantity(1);
+
+		// send user to cart.
+		navigate("/cart");
 	};
 
-	useEffect(fetchProduct, []);
+	useEffect(fetchProduct, [cartItems]);
 
-	const { name, image, colour, price, packQuantity, description } = product;
+	const { name, image, colour, price, packQuantity, description, stock } =
+		product;
 
 	return (
 		<div className={styles.Product}>
@@ -59,6 +86,7 @@ function ProductPage(props) {
 					<p>Price: {price}</p>
 					<p>Pack Size: {packQuantity}</p>
 					<p>Avaliable in: {colour}</p>
+					<p>In stock: {stock}</p>
 					<input
 						type="number"
 						value={quantity}
