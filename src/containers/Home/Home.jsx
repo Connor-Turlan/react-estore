@@ -7,17 +7,23 @@ import { useContext, useEffect } from "react";
 import { ProductContext } from "../../contexts/ProductContext";
 
 function Home(props) {
-	const { products, setProducts, isLoading, setLoading } =
-		useContext(ProductContext);
+	const { products, isLoading } = useContext(ProductContext);
+
+	// scroll to top on mount.
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	});
 
 	return (
 		<>
 			{isLoading && <Loading />}
-			<h1>🔥Store</h1>
+			<h1>🔥 Store</h1>
 
 			<Carousel products={products.slice(0, 5)} />
 			<StoreGrid items={products.slice(0, 18)} />
-			<NavLink to="/products">Show all Products</NavLink>
+			<NavLink className={styles.ShowAll} to="/products">
+				Show all Products
+			</NavLink>
 		</>
 	);
 }

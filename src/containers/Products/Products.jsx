@@ -7,6 +7,11 @@ import styles from "./Products.module.scss";
 function Products(props) {
 	const { isLoading, products } = useContext(ProductContext);
 
+	// scroll to top on mount.
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	});
+
 	return (
 		<>
 			<h1>All Products</h1>

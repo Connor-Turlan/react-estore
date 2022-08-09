@@ -1,1 +1,8 @@
-.Home {}
+@use "../../../styles/palette";
+
+.ShowAll {
+	background-color: palette.$light;
+	padding: 20px;
+	border: 2px solid palette.$accent;
+	border-radius: 10px;
+}

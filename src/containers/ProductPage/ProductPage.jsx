@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ProductContext } from "../../contexts/ProductContext";
 import { getProductByID } from "../../services/api";
 import Loading from "../../components/Loading/Loading";
-import styles from "./ProductPage.module.scss";
+import { ProductContext } from "../../contexts/ProductContext";
 import { ShoppingCartContext } from "../../contexts/ShoppingCartContext";
+import styles from "./ProductPage.module.scss";
 
 const getRequestedQuantity = () => {
 	const qty = document.getElementById();
@@ -58,6 +58,11 @@ function ProductPage(props) {
 	};
 
 	useEffect(fetchProduct, []);
+
+	// scroll to top on mount.
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	});
 
 	const { name, image, colour, price, packQuantity, description, stock } =
 		product;

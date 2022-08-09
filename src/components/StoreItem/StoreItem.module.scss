@@ -1,16 +1,26 @@
+@use "../../../styles/palette";
+
 .StoreItem {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 
-	border: 2px solid rgb(93, 122, 177);
-	border-radius: 5px;
+	border: 2px solid palette.$accent;
+	border-radius: 20px;
 
-	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.205);
+	color: palette.$dark;
+	text-decoration: none;
+
+	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+	background-color: palette.$light;
 
 	&:hover {
-		outline: 4px solid rgb(158, 190, 250);
+		outline: 3px solid palette.$base;
+	}
+
+	&:active {
+		background-color: palette.$light;
 	}
 
 	&__img {
