@@ -16,7 +16,9 @@ function Products(props) {
 		<>
 			<h1>All Products</h1>
 			{isLoading && <Loading />}
-			<StoreGrid items={products} />
+			<StoreGrid
+				items={products.sort((a, b) => a.name.localeCompare(b.name))}
+			/>
 		</>
 	);
 }

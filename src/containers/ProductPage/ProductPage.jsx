@@ -1,13 +1,15 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, NavLink } from "react-router-dom";
 import { getProductByID } from "../../services/api";
 import Loading from "../../components/Loading/Loading";
 import { ProductContext } from "../../contexts/ProductContext";
 import { ShoppingCartContext } from "../../contexts/ShoppingCartContext";
 import styles from "./ProductPage.module.scss";
+import VariantBar from "../../components/VariantBar/VariantBar";
 
 function ProductPage(props) {
-	const { loading, setLoading, updateStock } = useContext(ProductContext);
+	const { products, loading, setLoading, updateStock } =
+		useContext(ProductContext);
 	const { cartItems, setCart } = useContext(ShoppingCartContext);
 
 	const { productID } = useParams();
@@ -25,6 +27,8 @@ function ProductPage(props) {
 				setLoading(false);
 			});
 	};
+
+	getProductByID(productID).then(console.log);
 
 	const updateQuantity = (e) => {
 		if (e.target.value > 0 || e.target.value === "")
@@ -63,8 +67,16 @@ function ProductPage(props) {
 		window.scrollTo(0, 0);
 	});
 
-	const { name, image, colour, price, packQuantity, description, stock } =
-		product;
+	const {
+		name,
+		image,
+		colour,
+		price,
+		packQuantity,
+		description,
+		stock,
+		variants,
+	} = product;
 
 	return (
 		<div className={styles.Container}>
@@ -86,6 +98,7 @@ function ProductPage(props) {
 						<p>Price: {price}</p>
 						<p>Pack Size: {packQuantity}</p>
 						<p>Avaliable in: {colour}</p>
+						<VariantBar productID={productID} variants={variants} />
 
 						<p>In stock: {stock}</p>
 						{productID in cartItems && (
