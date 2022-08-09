@@ -26,45 +26,38 @@ function ProductPage(props) {
 
 		getProductByID(productID)
 			.then(setProduct)
-			.finally((data) => {
+			.finally(() => {
 				setLoading(false);
 			});
 	};
 
 	const updateQuantity = (e) => {
-		setQuantity(e.target.value);
+		if (e.target.value > 0 || e.target.value === "")
+			setQuantity(e.target.value);
 	};
 
 	const updateCart = async () => {
-		console.log(productID, quantity);
-		const { stock } = product;
-		const currentQty = cartItems[productID] || 0;
+		let { stock } = product;
 
-		// validate the quantity.
-		if (quantity <= 0) {
-			alert("stock quantity must be greater than 0.");
+		// get the requested quantity from the user.
+		const requested = parseInt(quantity);
+		const totalQty = (cartItems[productID] || 0) + requested;
+
+		// validate that the stock is availiable.
+		if (stock < totalQty) {
+			alert("not enough stock.");
 			return;
 		}
 
-		// validate the stock levels.
-		if (stock < currentQty) {
-			alert("not enough items in stock.");
-			return;
-		}
-
-		// update the product's stock count.
-		await updateStock(productID, stock - currentQty);
-		console.log(stock, currentQty, stock - currentQty);
-
-		// update the cart.
-		setCart({ ...cartItems, [productID]: currentQty + parseInt(quantity) });
-		setQuantity(1);
+		// update the cart and server stock counts.
+		setCart({ ...cartItems, [productID]: totalQty });
+		updateStock(productID, stock - requested);
 
 		// send user to cart.
 		navigate("/cart");
 	};
 
-	useEffect(fetchProduct, [cartItems]);
+	useEffect(fetchProduct, []);
 
 	const { name, image, colour, price, packQuantity, description, stock } =
 		product;
@@ -96,11 +89,6 @@ function ProductPage(props) {
 				</main>
 			</div>
 			<p className={styles.Product__Description}>{description}</p>
-
-			{/* <h3>Product Info Raw</h3>
-			{Object.entries(product || {}).map((entry) => (
-				<p key={entry[0]}>{entry.join(": ")}</p>
-			))} */}
 		</div>
 	);
 }

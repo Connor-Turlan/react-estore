@@ -18,7 +18,7 @@ export const ProductProvider = ({ children }) => {
 
 	const updateStock = async (productID, newQuantity) => {
 		await updateProductStock(productID, newQuantity);
-		await fetchProducts();
+		return fetchProducts();
 	};
 
 	useEffect(() => {

@@ -1,13 +1,10 @@
-import { createContext, useState, useEffect, useRef } from "react";
-import { CookiesProvider, useCookies } from "react-cookie";
-import { getProducts } from "../services/api";
+import { createContext, useState, useEffect } from "react";
+import { CookiesProvider } from "react-cookie";
 
 export const ShoppingCartContext = createContext();
 
 export const ShoppingCartProvider = ({ children }) => {
 	const [cartItems, setCart] = useState({});
-	/* const [cartID, setCartID] = useState(""); */
-	/* const [cookies, setCookie, removeCookie] = useCookies(); */
 
 	useEffect(() => {}, []);
 
