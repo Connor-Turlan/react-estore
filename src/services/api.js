@@ -1,18 +1,16 @@
 import { firestore } from "../firestore";
 
-const DUMMY_formatData = (json) => {
-	return json.map((entry) => {
-		const { title, first, last } = entry.name;
-		return { name: `${title} ${first} ${last}` };
-	});
-};
+const getDocumentFromDatabase = async (collection, reference) => {
+	// fetch the database collection for products.
+	const collectionRef = firestore.collection(collection);
+	const docRef = collectionRef.doc(reference);
 
-export const getItemData = async () => {
-	const res = await fetch(
-		"https://randomuser.me/api?page=1&results=20&seed=0308"
-	);
-	const data = await res.json();
-	return DUMMY_formatData(data.results);
+	// extract the product data from the database, include the document id.
+	const document = await docRef.get();
+	return {
+		...document.data(),
+		id: document.id,
+	};
 };
 
 export const getProducts = async () => {
@@ -25,17 +23,18 @@ export const getProducts = async () => {
 };
 
 export const getProductByID = async (itemID) => {
-	// fetch the database collection for products.
-	const collectionRef = firestore.collection("products");
-	const docRef = collectionRef.doc(itemID);
-
-	// extract the product data from the database, include the document id.
-	const document = await docRef.get();
-	return {
-		...document.data(),
-		id: document.id,
-	};
+	return await getDocumentFromDatabase("products", itemID);
 };
+
+export const createShoppingCart = async (cartID) => {};
+
+export const getShoppingCart = async (cartID) => {
+	return await getDocumentFromDatabase("carts", cartID);
+};
+
+export const addItemToCart = async (cartID, productID, qty = 1) => {};
+
+export const removeItemFromCart = async (cartID, productID, qty = 1) => {};
 
 // function to push new items to the database.
 /* export const pushItem = async (itemID, itemData) => {

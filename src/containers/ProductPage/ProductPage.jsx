@@ -4,9 +4,16 @@ import { ProductContext } from "../../contexts/ProductContext";
 import { getProductByID } from "../../services/api";
 import Loading from "../../components/Loading/Loading";
 import styles from "./ProductPage.module.scss";
+import { ShoppingCart } from "../../contexts/ShoppingCartContext";
+
+const getRequestedQuantity = () => {
+	const qty = document.getElementById();
+	return qty;
+};
 
 function ProductPage(props) {
 	const { loading, setLoading } = useContext(ProductContext);
+	const { cartItems, setCart } = useContext(ShoppingCart);
 	const [product, setProduct] = useState({});
 
 	const { productID } = useParams();
@@ -22,7 +29,8 @@ function ProductPage(props) {
 	};
 
 	const addProductToCart = () => {
-		console.log("beep boop.");
+		const currQuantity = cartItems[productID] || 0;
+		setProduct({ ...product, [productID]: currQuantity });
 	};
 
 	useEffect(fetchProduct, []);
