@@ -1,5 +1,9 @@
 import { firestore } from "../firestore";
 
+/* 
+	GENERAL PURPOSE DATABASE FUNCTIONS
+*/
+
 const getDocumentFromDatabase = async (collection, reference) => {
 	// fetch the database collection for products.
 	const collectionRef = firestore.collection(collection);
@@ -13,6 +17,24 @@ const getDocumentFromDatabase = async (collection, reference) => {
 	};
 };
 
+const updateDocumentProperty = async (
+	collection,
+	reference,
+	property,
+	newValue
+) => {
+	// fetch the database collection for products.
+	const collectionRef = firestore.collection(collection);
+	const docRef = collectionRef.doc(reference);
+	await docRef.update({ [property]: newValue });
+
+	return true;
+};
+
+/* 
+	DATABASE PRODUCT FUNCTIONS
+*/
+
 export const getProducts = async () => {
 	// fetch the database collection for products.
 	const collectionRef = firestore.collection("products");
@@ -25,6 +47,14 @@ export const getProducts = async () => {
 export const getProductByID = async (itemID) => {
 	return await getDocumentFromDatabase("products", itemID);
 };
+
+export const updateProductStock = async (itemID, newStock) => {
+	return updateDocumentProperty("products", itemID, "stock", newStock);
+};
+
+/* 
+	DATABASE SHOPPING CART - UNUSED (TODO - add remote cart that use cookies.)
+*/
 
 export const createShoppingCart = async (cartID) => {};
 

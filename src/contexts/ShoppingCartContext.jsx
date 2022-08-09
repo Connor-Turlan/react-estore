@@ -7,11 +7,11 @@ export const ShoppingCart = createContext();
 export const ShoppingCartProvider = ({ children }) => {
 	const [cartItems, setCart] = useState({});
 	const [cartID, setCartID] = useState("");
-	const [cookies, setCookie, removeCookie] = useCookies();
+	/* const [cookies, setCookie, removeCookie] = useCookies(); */
 
 	useEffect(() => {}, []);
 
-	const context = { cartItems, setCart, cookies };
+	const context = { cartItems, setCart };
 
 	return (
 		<CookiesProvider>

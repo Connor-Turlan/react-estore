@@ -14,7 +14,9 @@ const getRequestedQuantity = () => {
 function ProductPage(props) {
 	const { loading, setLoading } = useContext(ProductContext);
 	const { cartItems, setCart } = useContext(ShoppingCart);
+
 	const [product, setProduct] = useState({});
+	const [quantity, setQuantity] = useState(1);
 
 	const { productID } = useParams();
 
@@ -28,9 +30,12 @@ function ProductPage(props) {
 			});
 	};
 
-	const addProductToCart = () => {
-		const currQuantity = cartItems[productID] || 0;
-		setProduct({ ...product, [productID]: currQuantity });
+	const updateQuantity = (e) => {
+		if (e.target.value > 0) setQuantity(e.target.value);
+	};
+
+	const updateCart = () => {
+		console.log(productID, quantity);
 	};
 
 	useEffect(fetchProduct, []);
@@ -54,7 +59,12 @@ function ProductPage(props) {
 					<p>Price: {price}</p>
 					<p>Pack Size: {packQuantity}</p>
 					<p>Avaliable in: {colour}</p>
-					<button onClick={addProductToCart}>Add to Cart</button>
+					<input
+						type="number"
+						value={quantity}
+						onChange={updateQuantity}
+					/>
+					<button onClick={updateCart}>Add to Cart</button>
 				</main>
 			</div>
 			<p className={styles.Product__Description}>{description}</p>
