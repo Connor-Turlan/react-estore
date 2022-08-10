@@ -32,3 +32,9 @@
 		margin-top: auto;
 	}
 }
+
+.carousel {
+	&__image {
+		max-height: 300px;
+	}
+}

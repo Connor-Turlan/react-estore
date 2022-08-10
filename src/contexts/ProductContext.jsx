@@ -11,7 +11,12 @@ export const ProductProvider = ({ children }) => {
 		setLoading(true);
 
 		const promise = getProducts();
-		promise.then(setProducts).finally(setLoading(false));
+		promise
+			.then((items) => {
+				items.sort((a, b) => a.name.localeCompare(b.name));
+				setProducts(items);
+			})
+			.finally(setLoading(false));
 
 		return promise;
 	};

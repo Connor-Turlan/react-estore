@@ -79,46 +79,51 @@ function ProductPage(props) {
 	} = product;
 
 	return (
-		<div className={styles.Container}>
-			<div className={styles.Product}>
-				{loading && <Loading />}
-				<header className={styles.Product__Title}>
-					<h2>{name}</h2>
-					<p>FAV</p>
-				</header>
+		<>
+			{loading && <Loading />}
+			<div className={styles.Container}>
+				<div className={styles.Product}>
+					<header className={styles.Product__Title}>
+						<h2>{name}</h2>
+						<p>FAV</p>
+					</header>
 
-				<div className={styles.Product__Body}>
-					<img
-						className={styles.Product__Image}
-						src={image}
-						alt={name}
-					></img>
+					<div className={styles.Product__Body}>
+						<img
+							className={styles.Product__Image}
+							src={image}
+							alt={name}
+						></img>
 
-					<main className={styles.Product__Details}>
-						<p>Price: {price}</p>
-						<p>Pack Size: {packQuantity}</p>
-						<p>Avaliable in: {colour}</p>
-						<VariantBar productID={productID} variants={variants} />
-
-						<p>In stock: {stock}</p>
-						{productID in cartItems && (
-							<p>In cart: {cartItems[productID]}</p>
-						)}
-
-						<form onSubmit={updateCart}>
-							<input
-								type="number"
-								value={quantity}
-								onChange={updateQuantity}
+						<main className={styles.Product__Details}>
+							<p>Price: ${price}</p>
+							<p>Pack Size: {packQuantity}</p>
+							<p>Avaliable in: {colour}</p>
+							<VariantBar
+								productID={productID}
+								variants={variants}
 							/>
-							<input type="submit" value="Add to Cart" />
-						</form>
-					</main>
-				</div>
 
-				<p className={styles.Product__Description}>{description}</p>
+							<p>In stock: {stock}</p>
+							{productID in cartItems && (
+								<p>In cart: {cartItems[productID]}</p>
+							)}
+
+							<form onSubmit={updateCart}>
+								<input
+									type="number"
+									value={quantity}
+									onChange={updateQuantity}
+								/>
+								<input type="submit" value="Add to Cart" />
+							</form>
+						</main>
+					</div>
+
+					<p className={styles.Product__Description}>{description}</p>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 

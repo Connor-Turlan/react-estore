@@ -64,6 +64,21 @@ export const addItemToCart = async (cartID, productID, qty = 1) => {};
 
 export const removeItemFromCart = async (cartID, productID, qty = 1) => {};
 
+/* export const updateLeadingChars = async () => {
+	const products = await getProducts();
+	const allProducts = products.map((product) => {
+		if (true) {
+			updateDocumentProperty(
+				"products",
+				product.id,
+				"price",
+				parseFloat(product.price.toString().match(/[0-9.]+/))
+			);
+		}
+	});
+	return await Promise.all(allProducts);
+}; */
+
 // function to push new items to the database.
 /* export const pushItem = async (itemID, itemData) => {
 	const response = firestore.collection("products").doc(itemID).set(itemData);

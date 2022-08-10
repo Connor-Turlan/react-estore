@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import ShoppingCartItem from "../../components/ShoppingCartItem/ShoppingCartItem";
 import { ProductContext } from "../../contexts/ProductContext";
 import { ShoppingCartContext } from "../../contexts/ShoppingCartContext";
 import { updateProductStock } from "../../services/api";
@@ -28,15 +29,20 @@ function ShoppingCart(props) {
 
 	return (
 		<main className={styles.ShoppingCart}>
-			doot doot <i className="fa fa-shopping-cart"></i>
+			<h1>Shopping Cart</h1>
+			{/* <p>
+				doot doot <i className="fa fa-shopping-cart"></i>
+			</p> */}
+			<button onClick={clearCart}>Empty Cart</button>
 			<ul className={styles.ShoppingList}>
 				{Object.entries(cartItems).map(([productID, quantity]) => (
-					<li key={productID}>{`${
-						findProductByID(productID).name
-					} x${quantity}`}</li>
+					<ShoppingCartItem
+						key={productID}
+						product={findProductByID(productID)}
+						quantity={quantity}
+					/>
 				))}
 			</ul>
-			<button onClick={clearCart}>Empty Cart</button>
 		</main>
 	);
 }

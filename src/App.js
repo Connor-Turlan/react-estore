@@ -7,6 +7,8 @@ import ProductPage from "./containers/ProductPage/ProductPage";
 import { ProductProvider } from "./contexts/ProductContext";
 import ShoppingCart from "./containers/ShoppingCart/ShoppingCart";
 import ShoppingCartProvider from "./contexts/ShoppingCartContext";
+import { useEffect } from "react";
+import { updateLeadingChars } from "./services/api";
 
 function App() {
 	return (
