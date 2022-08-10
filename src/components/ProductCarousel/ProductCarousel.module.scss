@@ -1,0 +1,19 @@
+@use "/styles/palette";
+
+.ProductCarousel {
+	display: flex;
+	gap: 10px;
+
+	width: 100vw;
+
+	margin: 20px 0px;
+
+	background-color: palette.$dark;
+	box-shadow: inset 0px -10px 20px palette.$heavy-shadow,
+		inset 0px 10px 20px palette.$heavy-shadow;
+
+	overflow-x: scroll;
+	overflow-y: hidden;
+
+	scroll-snap-type: x proximity;
+}
