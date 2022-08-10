@@ -1,3 +1,5 @@
+@use "../../../styles/palette";
+
 .Product {
 	display: grid;
 	grid-template-rows: 100px 1fr;
@@ -32,6 +34,22 @@
 
 	&__Description {
 		margin-top: 100px;
+	}
+
+	&__fav {
+		border: none;
+		border-radius: 5px;
+
+		font-size: 24px;
+		background-color: white;
+
+		&:hover {
+			outline: 2px solid palette.$base;
+		}
+
+		&_selected {
+			color: palette.$base;
+		}
 	}
 }
 

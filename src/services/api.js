@@ -36,7 +36,10 @@ const updateDocumentProperty = async (
 export const getProducts = async () => {
 	// fetch the database collection for products.
 	const collectionRef = firestore.collection("products");
-	const data = await collectionRef.get();
+	console.log(
+		"rate limiting in place! only first ten items will be returned."
+	);
+	const data = await collectionRef.limit(10).get();
 
 	// extract the product data from the database, include the document id.
 	return data.docs.map((item) => ({ ...item.data(), id: item.id }));
@@ -48,6 +51,10 @@ export const getProductByID = async (itemID) => {
 
 export const updateProductStock = async (itemID, newStock) => {
 	return updateDocumentProperty("products", itemID, "stock", newStock);
+};
+
+export const updateProductFavourite = async (itemID, value) => {
+	return updateDocumentProperty("products", itemID, "favourite", value);
 };
 
 /* 
@@ -78,6 +85,16 @@ export const removeItemFromCart = async (cartID, productID, qty = 1) => {};
 	});
 	return await Promise.all(allProducts);
 }; */
+
+export const addPropFavourite = async () => {
+	const products = await getProducts();
+	const allProducts = products.map((product) => {
+		if (true) {
+			updateDocumentProperty("products", product.id, "favourite", false);
+		}
+	});
+	return await Promise.all(allProducts);
+};
 
 // function to push new items to the database.
 /* export const pushItem = async (itemID, itemData) => {

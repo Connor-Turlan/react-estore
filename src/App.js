@@ -8,9 +8,12 @@ import { ProductProvider } from "./contexts/ProductContext";
 import ShoppingCart from "./containers/ShoppingCart/ShoppingCart";
 import ShoppingCartProvider from "./contexts/ShoppingCartContext";
 import { useEffect } from "react";
-import { updateLeadingChars } from "./services/api";
+import { addPropFavourite, updateLeadingChars } from "./services/api";
 
 function App() {
+	useEffect(() => {
+		addPropFavourite();
+	});
 	return (
 		<main className={styles.App}>
 			<BrowserRouter>

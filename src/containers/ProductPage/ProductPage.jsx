@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate, NavLink } from "react-router-dom";
-import { getProductByID } from "../../services/api";
+import { getProductByID, updateProductFavourite } from "../../services/api";
 import Loading from "../../components/Loading/Loading";
 import { ProductContext } from "../../contexts/ProductContext";
 import { ShoppingCartContext } from "../../contexts/ShoppingCartContext";
@@ -8,7 +8,7 @@ import styles from "./ProductPage.module.scss";
 import VariantBar from "../../components/VariantBar/VariantBar";
 
 function ProductPage(props) {
-	const { products, loading, setLoading, updateStock } =
+	const { products, loading, setLoading, updateStock, fetchProducts } =
 		useContext(ProductContext);
 	const { cartItems, setCart } = useContext(ShoppingCartContext);
 
@@ -28,8 +28,6 @@ function ProductPage(props) {
 			});
 	};
 
-	getProductByID(productID).then(console.log);
-
 	const updateQuantity = (e) => {
 		if (e.target.value > 0 || e.target.value === "")
 			setQuantity(e.target.value);
@@ -38,7 +36,7 @@ function ProductPage(props) {
 	const updateCart = async (event) => {
 		event.preventDefault();
 
-		let { stock } = product;
+		const { stock } = product;
 
 		// get the requested quantity from the user.
 		const requested = parseInt(quantity);
@@ -60,6 +58,13 @@ function ProductPage(props) {
 		navigate("/cart");
 	};
 
+	const updateFavourite = async () => {
+		const { favourite } = product;
+		await updateProductFavourite(productID, !favourite);
+		await fetchProducts();
+		setProduct({ ...product, favourite: !favourite });
+	};
+
 	useEffect(fetchProduct, [cartItems, productID, setLoading]);
 
 	// scroll to top on mount.
@@ -76,7 +81,12 @@ function ProductPage(props) {
 		description,
 		stock,
 		variants,
+		favourite,
 	} = product;
+
+	const styleFav = favourite
+		? [styles.Product__fav, styles.Product__fav_selected].join(" ")
+		: styles.Product__fav;
 
 	return (
 		<>
@@ -85,7 +95,9 @@ function ProductPage(props) {
 				<div className={styles.Product}>
 					<header className={styles.Product__Title}>
 						<h2>{name}</h2>
-						<p>FAV</p>
+						<button className={styleFav} onClick={updateFavourite}>
+							<i className="fa">&#xf006;</i>
+						</button>
 					</header>
 
 					<div className={styles.Product__Body}>
