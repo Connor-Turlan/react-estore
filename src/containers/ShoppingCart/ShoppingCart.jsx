@@ -42,6 +42,21 @@ function ShoppingCart(props) {
 						quantity={quantity}
 					/>
 				))}
+				<li>
+					Subtotal: $
+					{Object.entries(cartItems)
+						.reduce(
+							(subtotal, [productID, quantity]) =>
+								subtotal +
+								(parseInt(
+									findProductByID(productID).price * 100
+								) *
+									parseInt(quantity)) /
+									100,
+							0
+						)
+						.toFixed(2)}
+				</li>
 			</ul>
 		</main>
 	);

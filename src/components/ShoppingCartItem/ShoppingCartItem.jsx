@@ -2,7 +2,7 @@ import styles from "./ShoppingCartItem.module.scss";
 
 function ShoppingCartItem({ product, quantity }) {
 	const { name, price } = product;
-	const totalPrice = parseFloat(price) * parseInt(quantity);
+	const totalPrice = (parseFloat(price) * parseInt(quantity)).toFixed(2);
 
 	return (
 		<li className={styles.ShoppingCartItem}>
