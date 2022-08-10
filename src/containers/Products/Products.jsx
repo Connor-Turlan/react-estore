@@ -6,7 +6,8 @@ import FilterBar from "../../components/FilterBar/FilterBar";
 /* import styles from "./Products.module.scss"; */
 
 function Products(props) {
-	/* const defaultSort = (a, b) => a.name.localeCompare(b.name); */
+	const defaultSort = (a, b) =>
+		a.name && b.name ? a.name.localeCompare(b.name) : a;
 
 	const { isLoading, products } = useContext(ProductContext);
 	/* const [sortingFunction, setSortingFunction] = useState(defaultSort); */
@@ -14,14 +15,14 @@ function Products(props) {
 	// scroll to top on mount.
 	useEffect(() => {
 		window.scrollTo(0, 0);
-	});
+	}, []);
 
 	return (
 		<>
 			<h1>All Products</h1>
 			{isLoading && <Loading />}
 			{/* <FilterBar setFilter={setSortingFunction} /> */}
-			<StoreGrid items={products} />
+			{!isLoading && <StoreGrid items={products.sort(defaultSort)} />}
 		</>
 	);
 }

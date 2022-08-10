@@ -70,7 +70,7 @@ function ProductPage(props) {
 	// scroll to top on mount.
 	useEffect(() => {
 		window.scrollTo(0, 0);
-	});
+	}, []);
 
 	const {
 		name,

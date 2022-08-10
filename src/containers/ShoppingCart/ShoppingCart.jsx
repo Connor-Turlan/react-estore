@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ShoppingCartItem from "../../components/ShoppingCartItem/ShoppingCartItem";
 import { ProductContext } from "../../contexts/ProductContext";
 import { ShoppingCartContext } from "../../contexts/ShoppingCartContext";
@@ -26,6 +26,11 @@ function ShoppingCart(props) {
 		// remove all items from the cart.
 		setCart({});
 	};
+
+	// scroll to top on mount.
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 
 	return (
 		<main className={styles.ShoppingCart}>

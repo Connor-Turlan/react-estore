@@ -1,5 +1,5 @@
 import styles from "./Carousel.module.scss";
-import CarouselItem from "../../components/CarouselItem/CarouselItem";
+import CarouselItem from "./CarouselItem/CarouselItem";
 
 function Carousel(props) {
 	const { products } = props;

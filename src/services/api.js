@@ -40,6 +40,7 @@ export const getProducts = async () => {
 		"rate limiting in place! only first ten items will be returned."
 	);
 	const data = await collectionRef.limit(10).get();
+	//const data = await collectionRef.get();
 
 	// extract the product data from the database, include the document id.
 	return data.docs.map((item) => ({ ...item.data(), id: item.id }));
