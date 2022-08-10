@@ -8,7 +8,7 @@ function StoreItem({ item }) {
 		<NavLink className={styles.StoreItem} to={`/products/${id}`}>
 			<h1>
 				{`${name}`}
-				{favourite && <i className="fa">&#xf006;</i>}
+				{favourite && <i className="fa">&#xf005;</i>}
 			</h1>
 			<img className={styles.StoreItem__img} src={image} />
 			<p>{`$${price}`}</p>

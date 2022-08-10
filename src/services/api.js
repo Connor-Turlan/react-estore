@@ -86,7 +86,7 @@ export const removeItemFromCart = async (cartID, productID, qty = 1) => {};
 	return await Promise.all(allProducts);
 }; */
 
-export const addPropFavourite = async () => {
+/* export const addPropFavourite = async () => {
 	const products = await getProducts();
 	const allProducts = products.map((product) => {
 		if (true) {
@@ -94,7 +94,7 @@ export const addPropFavourite = async () => {
 		}
 	});
 	return await Promise.all(allProducts);
-};
+}; */
 
 // function to push new items to the database.
 /* export const pushItem = async (itemID, itemData) => {

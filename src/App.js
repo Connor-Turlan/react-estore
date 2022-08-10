@@ -11,9 +11,6 @@ import { useEffect } from "react";
 import { addPropFavourite, updateLeadingChars } from "./services/api";
 
 function App() {
-	useEffect(() => {
-		addPropFavourite();
-	});
 	return (
 		<main className={styles.App}>
 			<BrowserRouter>

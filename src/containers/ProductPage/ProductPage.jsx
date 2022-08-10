@@ -95,8 +95,12 @@ function ProductPage(props) {
 				<div className={styles.Product}>
 					<header className={styles.Product__Title}>
 						<h2>{name}</h2>
-						<button className={styleFav} onClick={updateFavourite}>
-							<i className="fa">&#xf006;</i>
+						<button
+							className={styleFav}
+							onClick={updateFavourite}
+							title="Favouite Item?"
+						>
+							<i className="fa">&#xf005;</i>
 						</button>
 					</header>
 
