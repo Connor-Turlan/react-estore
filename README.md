@@ -2,7 +2,7 @@
 
 <img src="preview.png" height="450px" width="1200px" />
 
-<button style="border: 1px solid white; border-radius:5px; padding: 10px 20px; background-color:white;"><a href="https://connor-turlan.github.io/google-books-react/">View the Project</a></button>
+<button style="border: 1px solid white; border-radius:5px; padding: 10px 20px; background-color:white;"><a href="https://connor-turlan.github.io/react-estore/">View the Project</a></button>
 
 ## Setup
 
