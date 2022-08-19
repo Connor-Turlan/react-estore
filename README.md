@@ -2,9 +2,9 @@
 
 <img src="preview.png" height="450px" width="1200px" />
 
-<button style="border: 1px solid white; border-radius:5px; padding: 10px 20px; background-color:white;"><a href="https://connor-turlan.github.io/react-estore/">View the Project</a></button>
-
 ## Setup
+
+You will require a Firebase apikey for this project to work. By default the path of the firebase.json file is `/src/data/firebase.json`.
 
 Clone the project.
 
