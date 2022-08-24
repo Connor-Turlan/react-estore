@@ -1,4 +1,4 @@
-# Google Books API
+# React eStore
 
 <img src="preview.png" height="450px" width="1200px" />
 
