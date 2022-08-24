@@ -4,7 +4,7 @@
 
 ## Setup
 
-You will require a Firebase apikey for this project to work. By default the path of the firebase.json file is `/src/data/firebase.json`.
+You will require a Firebase API key for this project to work. By default the path of the firebase.json file is `/src/data/firebase.json`.
 
 Clone the project.
 
@@ -66,9 +66,19 @@ All products are required to be stored in the firestore database, in addition, i
 
 ## Retrospective
 
+I found this project difficult to begin with, as when I started I was inexperienced with React. The biggest challenge I faced was getting used to contexts, and how to use them in this application.
+
+While it isn't commonly used by many products, my favorite feature to implement was the item variants. I found that to be a really simple but effective addition to the store that made the entire app feel real.
+
+Coming back to this project, I would like to try and make use of more widely used components, such as a carousel from `better-react-carousel`.
+
+Also, I didn't design this project with responsiveness in mind, so potentially adding support for mobiles and tablets in future would be beneficial.
+
 ## Future Plans
 
--   Implement touch and drag for carousel component.
+-   Implement touch and drag for carousel component, or `better-react-carousel`.
+-   Add github secret to allow for a functional preview.
+-   Add responsive styling.
 
 ## Similar Projects
 
